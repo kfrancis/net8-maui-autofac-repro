@@ -1,6 +1,8 @@
-﻿namespace MauiApp2.Views;
+﻿using Volo.Abp.DependencyInjection;
 
-public partial class MainPage : ContentPage
+namespace MauiApp2.Views;
+
+public partial class MainPage : ContentPage, ISingletonDependency
 {
 	public MainPage(MainViewModel viewModel)
 	{

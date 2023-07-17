@@ -1,6 +1,8 @@
-﻿namespace MauiApp2.ViewModels;
+﻿using Volo.Abp.DependencyInjection;
 
-public partial class ListDetailViewModel : BaseViewModel
+namespace MauiApp2.ViewModels;
+
+public partial class ListDetailViewModel : BaseViewModel, ISingletonDependency
 {
 	readonly SampleDataService dataService;
 

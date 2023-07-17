@@ -1,5 +1,7 @@
-﻿namespace MauiApp2.ViewModels;
+﻿using Volo.Abp.DependencyInjection;
 
-public partial class MainViewModel : BaseViewModel
+namespace MauiApp2.ViewModels;
+
+public partial class MainViewModel : BaseViewModel, ISingletonDependency
 {
 }

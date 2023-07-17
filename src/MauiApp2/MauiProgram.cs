@@ -1,4 +1,7 @@
-﻿namespace MauiApp2;
+﻿using Volo.Abp;
+using Volo.Abp.Autofac;
+
+namespace MauiApp2;
 
 public static class MauiProgram
 {
@@ -12,20 +15,18 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+			})
+            .ConfigureContainer(new AbpAutofacServiceProviderFactory(new Autofac.ContainerBuilder()));
 
-		builder.Services.AddSingleton<MainViewModel>();
+        builder.Services.AddApplication<MauiModule>(options =>
+        {
+            options.Services.ReplaceConfiguration(builder.Configuration);
+        });
 
-		builder.Services.AddSingleton<MainPage>();
+        var app = builder.Build();
 
-		builder.Services.AddTransient<SampleDataService>();
-		builder.Services.AddTransient<ListDetailDetailViewModel>();
-		builder.Services.AddTransient<ListDetailDetailPage>();
+        app.Services.GetRequiredService<IAbpApplicationWithExternalServiceProvider>().Initialize(app.Services);
 
-		builder.Services.AddSingleton<ListDetailViewModel>();
-
-		builder.Services.AddSingleton<ListDetailPage>();
-
-		return builder.Build();
-	}
+        return app;
+    }
 }

@@ -1,6 +1,8 @@
-﻿namespace MauiApp2.Views;
+﻿using Volo.Abp.DependencyInjection;
 
-public partial class ListDetailDetailPage : ContentPage
+namespace MauiApp2.Views;
+
+public partial class ListDetailDetailPage : ContentPage, ITransientDependency
 {
 	public ListDetailDetailPage(ListDetailDetailViewModel viewModel)
 	{

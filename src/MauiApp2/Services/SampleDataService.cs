@@ -1,6 +1,8 @@
-﻿namespace MauiApp2.Services;
+﻿using Volo.Abp.DependencyInjection;
 
-public class SampleDataService
+namespace MauiApp2.Services;
+
+public class SampleDataService: ITransientDependency
 {
 	public async Task<IEnumerable<SampleItem>> GetItems()
 	{
