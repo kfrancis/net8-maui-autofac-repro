@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using MauiApp1.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace MauiApp1
 {
@@ -13,11 +16,18 @@ namespace MauiApp1
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                })
+                .ConfigureContainer(new AutofacServiceProviderFactory(), (autofac) =>
+                {
+                    autofac.RegisterType<MainPage>().SingleInstance();
+                    autofac.RegisterType<MainPageViewModel>().SingleInstance();
                 });
 
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
+
+            builder.Services.AddSingleton<IMauiInitializeService>(new IocConfigurationService());
 
             return builder.Build();
         }
